@@ -1,5 +1,5 @@
 import math
-from queenon import get_coordinates, entropy_concave
+from scripts.queenon import get_coordinates, entropy_concave
 import random
 class Solver:
     def __init__(self, board):
