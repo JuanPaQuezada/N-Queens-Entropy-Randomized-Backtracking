@@ -3,16 +3,15 @@ class Backtracker:
     def __init__(self, board):
         self.board = board
         self.cols_occupied = [False] * self.board.n
-        self.rows_occupied=[False]*self.board.n
         self.soluciones_encontradas=[]
     def _get_empty_positions(self):
         free_rows = []
         free_cols = []
         empty_positions = []
         for i in range(self.board.n):
-            if self.rows_occupied[i] == False:
+            if self.board.rows_occupied[i] == False:
                 free_rows.append(i)
-            if self.cols_occupied[i] == False:
+            if self.board.columns_occupied[i] == False:
                 free_cols.append(i)
 
         return free_rows, free_cols
@@ -32,4 +31,6 @@ class Backtracker:
 
     def complete_board(self):
         free_rows, free_cols=self._get_empty_positions()
-        return self._recursive_resolve(0, free_rows, free_cols)
+        self._recursive_resolve(0, free_rows, free_cols)
+        return self.soluciones_encontradas
+
