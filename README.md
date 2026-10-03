@@ -20,4 +20,4 @@ A hybrid n-Queens solver that places the vast majority of queens using randomize
 
 ```
 
-<img width="501" height="476" alt="image" src="https://github.com/user-attachments/assets/c3b7685a-6e62-4746-8d65-2e2cdd9324a9" />
+<img width="501" height="376" alt="image" src="https://github.com/user-attachments/assets/c3b7685a-6e62-4746-8d65-2e2cdd9324a9" />
