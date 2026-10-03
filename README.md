@@ -206,6 +206,20 @@ In summary:
 - The board validation and DFS repair are the original exact layer added for correctness.
 - The whole project reflects a realistic computational design: reduce the combinatorial burden first, then enforce feasibility exactly.
 
+---
+
+## 11. Heatmap analysis and structural diagnostics
+
+To complement the solver itself, the project includes a heatmap visualization layer in `scripts/visualizer.py`. This module does not modify the search logic; instead, it analyzes the set of valid solutions produced by the solver and counts how often each board cell is occupied across the complete solution set.
+
+The underlying idea is simple but informative: if a square is selected repeatedly across many valid configurations, it is structurally stable and tends to be part of the most robust solution patterns. Conversely, cells with low occupancy are either less canonical or more sensitive to the exact combinatorial arrangement. By aggregating these frequencies, the map reveals which regions of the board are consistently favored under the entropy-guided construction and the final exact correction.
+
+In practice, the implementation creates a matrix of size $N \times N$ initialized to zero, then for every valid queen placement in every solution it increments the corresponding cell counter. A normalized frequency scale is then used to color each square, so high-frequency cells appear more intense. This is especially useful for understanding the geometry of the solution space, because it provides a visual summary of the board’s structural tendencies rather than just a single valid arrangement.
+
+This visualization is therefore not a stand-alone optimization method; it is a diagnostic tool. It helps interpret why the randomized heuristic converges toward certain regions of the board and how the exact backtracking layer refines and finalizes the final configuration. It also gives an experimental and intuitive view of the interaction between probabilistic bias and exact feasibility.
+
+The figure below shows the heatmap generated from the solver’s output. The redder a cell is, the more often it appears among the valid solutions analyzed.
+
 <p align=center>
     <img width="401" height="376" alt="image" src="https://github.com/user-attachments/assets/c3b7685a-6e62-4746-8d65-2e2cdd9324a9" />
 </p>
