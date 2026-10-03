@@ -36,6 +36,13 @@ class VisorCustomTkinter:
         self.indice_actual = 0
         self.cell_size = 50
         self.canvas_size = self.n * self.cell_size
+        self.mapa_calor = np.zeros((self.n, self.n))
+        self.modo_calor=False
+        for solution in self.soluciones:
+            for row, col in solution:
+                self.mapa_calor[row][col]+=1
+
+        self.max_frecuencia = np.max(self.mapa_calor)
 
         ctk.set_appearance_mode("Dark")
         ctk.set_default_color_theme("blue")
@@ -55,20 +62,23 @@ class VisorCustomTkinter:
         btn_frame = ctk.CTkFrame(self.root, fg_color="transparent")
         btn_frame.pack(pady=10)
 
-        self.btn_prev = ctk.CTkButton(btn_frame, text="⬅️ Anterior", command=self.prev_solucion, 
+        self.btn_prev = ctk.CTkButton(btn_frame, text="Anterior", command=self.prev_solucion, 
                                       width=120, height=35, font=("Roboto", 14))
         self.btn_prev.pack(side="left", padx=20)
 
-        self.btn_next = ctk.CTkButton(btn_frame, text="Siguiente ➡️", command=self.next_solucion, 
+        self.btn_next = ctk.CTkButton(btn_frame, text="Siguiente", command=self.next_solucion, 
                                       width=120, height=35, font=("Roboto", 14))
         self.btn_next.pack(side="right", padx=20)
+
+        self.btn_mapaCalor = ctk.CTkButton(self.root, text="Mapa de calor", command=self.toggle_calor, 
+                                           width=120, height=35, font=("Roboto", 14))
+        self.btn_mapaCalor.pack(padx=20)
 
         self.root.bind("<Right>", lambda event: self.next_solucion())
         self.root.bind("<Left>", lambda event: self.prev_solucion())
 
         self.dibujar_tablero()
         self.root.mainloop()
-
     def dibujar_tablero(self):
         self.canvas.delete("all")
         color_claro = "#DDE3E6"
@@ -80,8 +90,18 @@ class VisorCustomTkinter:
                 y1 = row * self.cell_size
                 x2 = x1 + self.cell_size
                 y2 = y1 + self.cell_size
-                
-                color = color_claro if (row + col) % 2 == 0 else color_oscuro
+                if self.modo_calor:
+                    frecuencia = self.mapa_calor[row][col]
+                    if frecuencia > 0:
+                        porcentaje = frecuencia / self.max_frecuencia
+                        intensity = int(255 * porcentaje)
+                        color = f'#{intensity:02x}0000'
+
+                    else: 
+                        color="#444444"
+                else:
+                    color = color_claro if (row + col) % 2 == 0 else color_oscuro
+                    borde=""
                 self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, outline="")
 
         if self.soluciones:
@@ -105,6 +125,9 @@ class VisorCustomTkinter:
         if self.soluciones:
             self.indice_actual = (self.indice_actual - 1) % len(self.soluciones)
             self.dibujar_tablero()
+    def toggle_calor(self):
+        self.modo_calor = not self.modo_calor
+        self.dibujar_tablero()
 
 def iniciar_visor(all_solutions, n):
     VisorCustomTkinter(all_solutions, n)
