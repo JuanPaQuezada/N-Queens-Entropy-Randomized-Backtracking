@@ -18,5 +18,6 @@ A hybrid n-Queens solver that places the vast majority of queens using randomize
     ├── __init__.py       # Archivo necesario para que las herramientas de testing reconozcan el directorio.
     └── test8x8.py        # Pruebas a pequeña escala (8x8) para validar que no haya reinas atacándose.
 
+```
 
 <img width="501" height="476" alt="image" src="https://github.com/user-attachments/assets/c3b7685a-6e62-4746-8d65-2e2cdd9324a9" />
