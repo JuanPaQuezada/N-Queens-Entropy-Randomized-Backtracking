@@ -149,8 +149,6 @@ In short, the solver trades a controlled amount of probabilistic guidance for a 
 ## 7. Repository structure
 
 ```text
-.
-<<<<<<< HEAD
 ├── README.md
 ├── requirements.txt
 ├── scripts/
@@ -208,8 +206,7 @@ In summary:
 - The board validation and DFS repair are the original exact layer added for correctness.
 - The whole project reflects a realistic computational design: reduce the combinatorial burden first, then enforce feasibility exactly.
 
-This is not just a toy implementation; it is a practical hybrid strategy for a difficult constraint problem.
-=======
+```
 ├── README.md             # Documento principal con la descripción, instalación y uso del proyecto.
 ├── scripts/              # Módulos lógicos y matemáticos centrales del algoritmo.
 │   ├── __init__.py       # Archivo que define el directorio como un paquete Python importable.
