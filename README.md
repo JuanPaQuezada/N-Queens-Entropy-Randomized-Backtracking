@@ -143,8 +143,9 @@ The weighted random placement is bounded by the number of queens inserted before
 The backtracking phase remains exponential in the worst case, because the problem is NP-hard in its general form. However, it operates only on the remaining unresolved structure, and therefore it is substantially smaller than solving the entire board from an empty state.
 
 In short, the solver trades a controlled amount of probabilistic guidance for a substantially reduced exact search space.
-
-<img width="510" height="626" alt="image" src="https://github.com/user-attachments/assets/8da5216b-c438-4112-81ed-9aa4ae0bc704" />
+<p align="center">
+    <img width="410" height="426" alt="image" src="https://github.com/user-attachments/assets/8da5216b-c438-4112-81ed-9aa4ae0bc704" />
+</p>
 
 ---
 
